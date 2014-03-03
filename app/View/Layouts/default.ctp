@@ -51,6 +51,7 @@ $cakeDescription = __d('cake_dev', 'Campagne Ensimag 2014');
 
 		echo $this->Html->css('bootstrap-theme');
 		echo $this->Html->css('bootstrap');
+
 		echo $this->Html->script('jquery');
 		echo $this->Html->script('bootstrap');
 
@@ -59,7 +60,9 @@ $cakeDescription = __d('cake_dev', 'Campagne Ensimag 2014');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
-
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 </head>
 <body>
