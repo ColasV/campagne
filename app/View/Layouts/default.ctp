@@ -54,14 +54,15 @@ $cakeDescription = __d('cake_dev', 'Campagne Ensimag 2014');
 
 		echo $this->Html->script('jquery');
 		echo $this->Html->script('bootstrap');
+    echo $this->Html->script('highcharts');
+    echo $this->Html->script('exporting');
 
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
-  <script src="http://code.highcharts.com/highcharts.js"></script>
-<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 </head>
