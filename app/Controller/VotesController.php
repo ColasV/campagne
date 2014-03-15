@@ -40,7 +40,7 @@ class VotesController extends AppController {
   **/
   public function voter($id = -1) {
     if ($this->request->is('post')) {
-        $user = $this->request->data['login']['username'];
+        $user = trim(strtolower($this->request->data['login']['username']));
         $passwd = $this->request->data['login']['password'];
 
         if($this->isEnsimag($user,$passwd)) {

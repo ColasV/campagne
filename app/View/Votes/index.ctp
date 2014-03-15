@@ -1,4 +1,13 @@
-<div class="row">
+
+<div class="row text-center">
+  <h2>Vote pour ta liste préféré</h2>
+  <?php $i = rand(0,2); ?>
+  <div class="col-md-4"><?php echo $this->Html->image(($i%3).'.png', array('class' => 'img-circle','width'=>'100px','url' => array('controller' => 'Votes', 'action' => 'voter', (($i)%3 + 1)))); ?></div>
+  <div class="col-md-4"><?php echo $this->Html->image((($i+1)%3).'.png', array('class' => 'img-circle','width'=>'100px','url' => array('controller' => 'Votes', 'action' => 'voter', (($i+1)%3) + 1))); ?></div>
+  <div class="col-md-4"><?php echo $this->Html->image((($i+2)%3).'.png', array('class' => 'img-circle','width'=>'100px','url' => array('controller' => 'Votes', 'action' => 'voter', (($i+2)%3) + 1))); ?></div>
+</div>
+
+<div class="row" id="resultat">
   <h1>Page des résultats des votes</h1>
 
 <script type="text/javascript">
@@ -105,16 +114,4 @@ $(function () {
 <p>Nombre de vote pour Listérique : <?php echo $liste_1; ?></p>
 <p>Nombre de vote pour Régliste : <?php echo $liste_2;?></p>
 <p>Nombre de vote pour Plus Belle la Liste : <?php echo $liste_3;?></p>
-</div>
-
-
-
-
-<div class="row">
-  <h2>Vote pour ta liste préféré</h2>
-  <div class="col-md-6 col-md-offset-3">
-    <a href="<?php echo $this->Html->url(array('controller' => 'Votes','action' => 'voter',1)); ?>" role="button" class="btn btn-primary btn-block">Listérique</a>
-    <a href="<?php echo $this->Html->url(array('controller' => 'Votes','action' => 'voter',2)); ?>" role="button" class="btn btn-primary btn-block">Régliste</a>
-    <a href="<?php echo $this->Html->url(array('controller' => 'Votes','action' => 'voter',3)); ?>" role="button" class="btn btn-primary btn-block">Plus Belle la Liste</a>
-  </div>
 </div>

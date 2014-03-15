@@ -69,9 +69,9 @@ $cakeDescription = __d('cake_dev', 'Campagne Ensimag 2014');
 <body>
 	<nav class="navbar navbar-default navbar-static-top" role="navigation">
 		<div class="container">
-			<a class="navbar-brand" href="#">Campagne Ensimag</a>
+			<a class="navbar-brand" href="<?php echo Router::url('/'); ?>">Campagne Ensimag</a>
 			<ul class="nav navbar-nav">
-          <li><a href="#">Résultats</a></li>
+          <li><a href="<?php echo Router::url('/'); ?>#resultat">Résultats</a></li>
 			</ul>
 		</div>
 	</nav>
