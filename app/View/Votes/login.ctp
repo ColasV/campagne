@@ -1,3 +1,6 @@
+<div class="alert alert-info">
+<p>Utilise tes identifiants Ensimag pour te connecter !</p>
+</div>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
 <?php

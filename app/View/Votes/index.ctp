@@ -111,7 +111,7 @@ $(function () {
 
 </div>
 <div class="row">
-<p>Nombre de vote pour Listérique : <?php echo $liste_1; ?></p>
-<p>Nombre de vote pour Régliste : <?php echo $liste_2;?></p>
-<p>Nombre de vote pour Plus Belle la Liste : <?php echo $liste_3;?></p>
+<p>Nombre de vote pour les Sex Plistols : <?php echo $liste_1; ?></p>
+<p>Nombre de vote pour La Mentaliste : <?php echo $liste_2;?></p>
+<p>Nombre de vote pour La Dolce Lista : <?php echo $liste_3;?></p>
 </div>
