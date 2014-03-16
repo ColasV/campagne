@@ -61,7 +61,7 @@ $(function () {
                 }
             },
             series: [{
-                name: 'Listerique',
+                name: 'Sex Plistols',
               <?php echo 'data: [';
                 echo '[1394920800000,0],';
                 foreach ($liste1 as $vote) {
@@ -75,7 +75,7 @@ $(function () {
                 ?>
 
             }, {
-                name: 'Regliste',
+                name: 'La Mentaliste',
                 <?php echo 'data: [';
                 echo '[1394920800000,0],';
                   foreach ($liste2 as $vote) {
@@ -89,7 +89,7 @@ $(function () {
                   echo ']';
                   ?>
             }, {
-                name: 'PBLL',
+                name: 'La Dolce Lista',
                 <?php echo 'data: [';
                  echo '[1394920800000,0],';
                   foreach ($liste3 as $vote) {
