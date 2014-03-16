@@ -63,6 +63,7 @@ $(function () {
             series: [{
                 name: 'Listerique',
               <?php echo 'data: [';
+                echo '[1394920800000,0],';
                 foreach ($liste1 as $vote) {
                   echo '[';
                   echo (date('U',strtotime($vote['votes']['date']))+3600)*1000;
@@ -76,7 +77,9 @@ $(function () {
             }, {
                 name: 'Regliste',
                 <?php echo 'data: [';
+                echo '[1394920800000,0],';
                   foreach ($liste2 as $vote) {
+
                     echo '[';
                     echo (date('U',strtotime($vote['votes']['date']))+3600)*1000;
                     echo ',';
@@ -88,7 +91,9 @@ $(function () {
             }, {
                 name: 'PBLL',
                 <?php echo 'data: [';
+                 echo '[1394920800000,0],';
                   foreach ($liste3 as $vote) {
+                   
                     echo '[';
                     echo (date('U',strtotime($vote['votes']['date']))+3600)*1000;
                     echo ',';
