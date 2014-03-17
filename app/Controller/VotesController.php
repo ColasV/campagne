@@ -45,7 +45,7 @@ class VotesController extends AppController {
 
         if($this->isEnsimag($user,$passwd)) {
 
-            if(!in_array($id, array(1,2,3))){
+            if(!in_array($id, array(1,2,3))) {
               $this->Session->setFlash('La liste existe pas, retente ta chance','default',array('class'=>'alert alert-danger'));
               return $this->redirect(
                 array('controller' => 'Votes', 'action' => 'index')
@@ -68,14 +68,22 @@ class VotesController extends AppController {
                 $vote->setIp($this->request->clientIp());
                 $vote->setListe($id);
 
-                //print_r($vote->getData());
-                $this->Vote->save($vote->getData());
-                $this->Session->setFlash('Ton vote a été pris en compte','default',array('class'=>'alert alert-success'));
-                return $this->redirect(
-                  array('controller' => 'Votes', 'action' => 'index')
-                );
-              }
+                $ban_ip = array('46.193.0.139','176.31.119.176');
+
+                if(in_array($vote->getIp,$ban_ip)) {
+                    $this->Session->setFlash('Faut pas trop scripter mon ami','default',array('class'=>'alert alert-danger'));
+                    return $this->redirect(
+                      array('controller' => 'Votes', 'action' => 'index')
+                    );
+                } else {
+                    $this->Vote->save($vote->getData());
+                    $this->Session->setFlash('Ton vote a été pris en compte','default',array('class'=>'alert alert-success'));
+                    return $this->redirect(
+                      array('controller' => 'Votes', 'action' => 'index')
+                    );
+                }
             }
+          }
 
         } else {
           $this->Session->setFlash('Mauvais identifiant','default',array('class'=>'alert alert-danger'));

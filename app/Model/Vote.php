@@ -26,6 +26,10 @@ class Vote extends AppModel {
     $this->liste = $liste;
   }
 
+  public function getIP() {
+    return $this->ip;
+  }
+
   public function getData() {
     $array = array('Vote' => array(
       'date' => $this->date,
