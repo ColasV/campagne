@@ -2,6 +2,7 @@
 
 App::uses('AppController', 'Controller');
 App::uses('Vote', 'Model');
+App::import('Lib', 'Captcha');
 
 class VotesController extends AppController {
   public $components = array('Session');
@@ -68,21 +69,30 @@ class VotesController extends AppController {
                 $vote->setIp($this->request->clientIp());
                 $vote->setListe($id);
 
-                $ban_ip = array('46.193.0.139','176.31.119.176');
+                /* Code captcha */
+                $privatekey = "6LddPfASAAAAAK4whq9aR9Y2tf8uubD_xYjbfpdT";
+                $resp = recaptcha_check_answer ($privatekey,
+                $_SERVER["REMOTE_ADDR"],
+                $_POST["recaptcha_challenge_field"],
+                $_POST["recaptcha_response_field"]);
 
-                if(in_array($vote->getIp,$ban_ip)) {
-                    $this->Session->setFlash('Faut pas trop scripter mon ami','default',array('class'=>'alert alert-danger'));
-                    return $this->redirect(
-                      array('controller' => 'Votes', 'action' => 'index')
-                    );
+                if ($resp->is_valid) {
+                  $this->Vote->save($vote->getData());
+                  $this->Session->setFlash('Ton vote a été pris en compte','default',array('class'=>'alert alert-success'));
+                  return $this->redirect(
+                    array('controller' => 'Votes', 'action' => 'index')
+                  );
                 } else {
-                    $this->Vote->save($vote->getData());
-                    $this->Session->setFlash('Ton vote a été pris en compte','default',array('class'=>'alert alert-success'));
+                    $this->Session->setFlash('Il faut pas se tromper de captcha','default',array('class'=>'alert alert-danger'));
                     return $this->redirect(
                       array('controller' => 'Votes', 'action' => 'index')
                     );
                 }
-            }
+
+
+
+
+                }
           }
 
         } else {
