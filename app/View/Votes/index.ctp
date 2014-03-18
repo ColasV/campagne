@@ -116,10 +116,59 @@ $(function () {
 </script>
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
 
-</div>
-<div class="row">
-<p>Nombre de vote pour les Sex Plistols : <?php echo $liste_1; ?></p>
-<p>Nombre de vote pour La Mentaliste : <?php echo $liste_2;?></p>
-<p>Nombre de vote pour La Dolce Lista : <?php echo $liste_3;?></p>
+<script>
+$(function () {
+        $('#votes').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Résultats'
+            },
+            xAxis: {
+                categories: [
+                    'Votes totaux'
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Nombre total de votes'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Tokyo',
+                data: [<?php echo $liste_1; ?>]
+
+            }, {
+                name: 'New York',
+                data: [<?php echo $liste_2; ?>]
+
+            }, {
+                name: 'London',
+                data: [<?php echo $liste_3; ?>]
+
+            }]
+        });
+    });
+</script>
+<div id="votes" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
 </div>
