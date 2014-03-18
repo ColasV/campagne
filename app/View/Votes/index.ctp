@@ -62,6 +62,7 @@ $(function () {
             },
             series: [{
                 name: 'Sex Plistols',
+                color: '#ffff30',
               <?php echo 'data: [';
                 echo '[1394920800000,0],';
                 foreach ($liste1 as $vote) {
@@ -76,6 +77,7 @@ $(function () {
 
             }, {
                 name: 'La Mentaliste',
+                color: '#A123B9',
                 <?php echo 'data: [';
                 echo '[1394920800000,0],';
                   foreach ($liste2 as $vote) {
@@ -90,10 +92,11 @@ $(function () {
                   ?>
             }, {
                 name: 'La Dolce Lista',
+                color: '#f49ac1',
                 <?php echo 'data: [';
                  echo '[1394920800000,0],';
                   foreach ($liste3 as $vote) {
-                   
+
                     echo '[';
                     echo (date('U',strtotime($vote['votes']['date']))+3600)*1000;
                     echo ',';
