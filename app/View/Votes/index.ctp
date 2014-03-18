@@ -1,4 +1,3 @@
-
 <div class="row text-center">
   <h2>Vote pour ta liste préféré</h2>
   <?php $i = rand(0,2); ?>
@@ -65,11 +64,13 @@ $(function () {
                 color: '#ffff30',
               <?php echo 'data: [';
                 echo '[1394920800000,0],';
+                $somme = 0;
                 foreach ($liste1 as $vote) {
                   echo '[';
                   echo (date('U',strtotime($vote['votes']['date']))+3600)*1000;
                   echo ',';
-                  echo $vote[0]['c'];
+                  $somme += $vote[0]['c'];
+                  echo $somme;
                   echo '],';
                 }
                 echo ']';
@@ -80,12 +81,14 @@ $(function () {
                 color: '#A123B9',
                 <?php echo 'data: [';
                 echo '[1394920800000,0],';
+                $somme = 0;
                   foreach ($liste2 as $vote) {
 
                     echo '[';
                     echo (date('U',strtotime($vote['votes']['date']))+3600)*1000;
                     echo ',';
-                    echo $vote[0]['c'];
+                    $somme += $vote[0]['c'];
+                    echo $somme;
                     echo '],';
                   }
                   echo ']';
@@ -95,12 +98,14 @@ $(function () {
                 color: '#f49ac1',
                 <?php echo 'data: [';
                  echo '[1394920800000,0],';
+                 $somme = 0;
                   foreach ($liste3 as $vote) {
 
                     echo '[';
                     echo (date('U',strtotime($vote['votes']['date']))+3600)*1000;
                     echo ',';
-                    echo $vote[0]['c'];
+                    $somme += $vote[0]['c'];
+                    echo $somme;
                     echo '],';
                   }
                   echo ']';
@@ -116,51 +121,113 @@ $(function () {
 </script>
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-<script src="http://code.highcharts.com/highcharts.js"></script>
-<script src="http://code.highcharts.com/modules/exporting.js"></script>
-
-<script>
+<script type="text/javascript">
 $(function () {
         $('#votes').highcharts({
-            chart: {
-                type: 'column'
+          chart: {
+                renderTo: 'tendance',
+                type: 'spline'
             },
             title: {
-                text: 'Résultats'
+                text: 'Votes'
+            },
+            subtitle: {
+                text: 'Suivi des votes'
             },
             xAxis: {
-                categories: [
-                    'Votes totaux'
-                ]
+                type: 'datetime'
             },
             yAxis: {
-                min: 0,
                 title: {
-                    text: 'Nombre total de votes'
+                    text: 'Nombre de votes'
+                },
+                min: 0,
+             },
+            tooltip: {
+                formatter: function() {
+                        return ''+
+                        Highcharts.dateFormat('%e. %b %Y, %H H', this.x) +': '+ this.y +' votants';
                 }
             },
             plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
+                spline: {
+                    lineWidth: 4,
+                    states: {
+                        hover: {
+                            lineWidth: 5
+                        }
+                    },
+                    marker: {
+                        enabled: false,
+                        states: {
+                            hover: {
+                                enabled: true,
+                                symbol: 'circle',
+                                radius: 5,
+                                lineWidth: 1
+                            }
+                        }
+                    },
+
                 }
             },
             series: [{
                 name: 'Sex Plistols',
                 color: '#ffff30',
-                data: [<?php echo $liste_1; ?>]
+              <?php echo 'data: [';
+                echo '[1394920800000,0],';
+                $somme = 0;
+                foreach ($liste1 as $vote) {
+                  echo '[';
+                  echo (date('U',strtotime($vote['votes']['date']))+3600)*1000;
+                  echo ',';
+                
+                  echo $vote[0]['c'];
+                  echo '],';
+                }
+                echo ']';
+                ?>
 
             }, {
                 name: 'La Mentaliste',
                 color: '#A123B9',
-                data: [<?php echo $liste_2; ?>]
+                <?php echo 'data: [';
+                echo '[1394920800000,0],';
+                $somme = 0;
+                  foreach ($liste2 as $vote) {
 
+                    echo '[';
+                    echo (date('U',strtotime($vote['votes']['date']))+3600)*1000;
+                    echo ',';
+
+                    echo $vote[0]['c'];
+                    echo '],';
+                  }
+                  echo ']';
+                  ?>
             }, {
                 name: 'La Dolce Lista',
                 color: '#f49ac1',
-                data: [<?php echo $liste_3; ?>]
+                <?php echo 'data: [';
+                 echo '[1394920800000,0],';
+                 $somme = 0;
+                  foreach ($liste3 as $vote) {
 
-            }]
+                    echo '[';
+                    echo (date('U',strtotime($vote['votes']['date']))+3600)*1000;
+                    echo ',';
+
+                    echo $vote[0]['c'];
+                    echo '],';
+                  }
+                  echo ']';
+                  ?>
+            }],
+            navigation: {
+                menuItemStyle: {
+                    fontSize: '10px'
+                }
+            }
         });
     });
 </script>

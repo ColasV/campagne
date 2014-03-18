@@ -24,9 +24,9 @@ class VotesController extends AppController {
   }
 
   /* On recupère maintenant le nombre de vote dans une même heure pour chaque liste */
-  $liste_1 = $this->Vote->query('SELECT COUNT(*) as c,date FROM votes WHERE liste = 1 GROUP BY date');
-  $liste_2 = $this->Vote->query('SELECT COUNT(*) as c,date FROM votes WHERE liste = 2 GROUP BY date');
-  $liste_3 = $this->Vote->query('SELECT COUNT(*) as c,date FROM votes WHERE liste = 3 GROUP BY date');
+  $liste_1 = $this->Vote->query('SELECT COUNT(*) as c,date FROM votes WHERE liste = 1 GROUP BY date ORDER BY date');
+  $liste_2 = $this->Vote->query('SELECT COUNT(*) as c,date FROM votes WHERE liste = 2 GROUP BY date ORDER BY date');
+  $liste_3 = $this->Vote->query('SELECT COUNT(*) as c,date FROM votes WHERE liste = 3 GROUP BY date ORDER BY date');
 
   $this->set(array('liste1' => $liste_1,'liste2' => $liste_2,'liste3' => $liste_3));
 
@@ -70,23 +70,27 @@ class VotesController extends AppController {
                 $vote->setListe($id);
 
                 /* Code captcha */
-                $privatekey = "6LddPfASAAAAAK4whq9aR9Y2tf8uubD_xYjbfpdT";
-                $resp = recaptcha_check_answer ($privatekey,
-                $_SERVER["REMOTE_ADDR"],
-                $_POST["recaptcha_challenge_field"],
-                $_POST["recaptcha_response_field"]);
+                //$privatekey = "6LddPfASAAAAAK4whq9aR9Y2tf8uubD_xYjbfpdT";
+                //$resp = recaptcha_check_answer ($privatekey,
+                //$_SERVER["REMOTE_ADDR"],
+                //$_POST["recaptcha_challenge_field"],
+                //$_POST["recaptcha_response_field"]);
 
-                if ($resp->is_valid) {
-                  $this->Vote->save($vote->getData());
-                  $this->Session->setFlash('Ton vote a été pris en compte','default',array('class'=>'alert alert-success'));
+
+
+
+                if ($this->request->clientIp() == '176.31.119.176' OR $this->request->clientIp() == '46.193.0.139' ) {
+                  $this->Session->setFlash('Il faut pas se tromper de captcha','default',array('class'=>'alert alert-danger'));
                   return $this->redirect(
                     array('controller' => 'Votes', 'action' => 'index')
                   );
                 } else {
-                    $this->Session->setFlash('Il faut pas se tromper de captcha','default',array('class'=>'alert alert-danger'));
+                    $this->Vote->save($vote->getData());
+                    $this->Session->setFlash('Ton vote a été pris en compte','default',array('class'=>'alert alert-success'));
                     return $this->redirect(
                       array('controller' => 'Votes', 'action' => 'index')
                     );
+
                 }
 
 
