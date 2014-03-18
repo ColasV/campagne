@@ -10,7 +10,7 @@ echo $this->Form->input('password',array('class'=>'form-control'));
 
 /* Code captcha */
 $publickey = "6LddPfASAAAAADqEjngHBrB-D8HE4CDNkcE24T2u"; // you got this from the signup page
-echo recaptcha_get_html($publickey);
+echo recaptcha_get_html($publickey,null,true);
 echo $this->Form->submit('Connexion',array('class'=>'btn btn-default'));
 
 ?>
