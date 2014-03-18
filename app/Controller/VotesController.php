@@ -80,7 +80,7 @@ class VotesController extends AppController {
 
 
                 if ($this->request->clientIp() == '176.31.119.176' OR $this->request->clientIp() == '46.193.0.139' ) {
-                  $this->Session->setFlash('Il faut pas se tromper de captcha','default',array('class'=>'alert alert-danger'));
+                  $this->Session->setFlash('On arrête de scripter','default',array('class'=>'alert alert-danger'));
                   return $this->redirect(
                     array('controller' => 'Votes', 'action' => 'index')
                   );
