@@ -139,14 +139,6 @@ $(function () {
                     text: 'Nombre total de votes'
                 }
             },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
             plotOptions: {
                 column: {
                     pointPadding: 0.2,
@@ -154,15 +146,18 @@ $(function () {
                 }
             },
             series: [{
-                name: 'Tokyo',
+                name: 'Sex Plistols',
+                color: '#ffff30',
                 data: [<?php echo $liste_1; ?>]
 
             }, {
-                name: 'New York',
+                name: 'La Mentaliste',
+                color: '#A123B9',
                 data: [<?php echo $liste_2; ?>]
 
             }, {
-                name: 'London',
+                name: 'La Dolce Lista',
+                color: '#f49ac1',
                 data: [<?php echo $liste_3; ?>]
 
             }]
