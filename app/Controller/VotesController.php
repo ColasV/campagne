@@ -70,27 +70,32 @@ class VotesController extends AppController {
                 $vote->setListe($id);
 
                 /* Code captcha */
-                //$privatekey = "6LddPfASAAAAAK4whq9aR9Y2tf8uubD_xYjbfpdT";
-                //$resp = recaptcha_check_answer ($privatekey,
-                //$_SERVER["REMOTE_ADDR"],
-                //$_POST["recaptcha_challenge_field"],
-                //$_POST["recaptcha_response_field"]);
+                $privatekey = "6LddPfASAAAAAK4whq9aR9Y2tf8uubD_xYjbfpdT";
+                $resp = recaptcha_check_answer ($privatekey,
+                $_SERVER["REMOTE_ADDR"],
+                $_POST["recaptcha_challenge_field"],
+                $_POST["recaptcha_response_field"]);
 
 
-
-
-                if ($this->request->clientIp() == '176.31.119.176' OR $this->request->clientIp() == '46.193.0.139' OR $this->request->clientIp() == '130.190.32.51') {
-                  $this->Session->setFlash('On arrête de scripter','default',array('class'=>'alert alert-danger'));
-                  return $this->redirect(
-                    array('controller' => 'Votes', 'action' => 'index')
-                  );
-                } else {
-                    $this->Vote->save($vote->getData());
-                    $this->Session->setFlash('Ton vote a été pris en compte','default',array('class'=>'alert alert-success'));
+                if($resp->is_valid) {
+                  if ($this->request->clientIp() == '176.31.119.176' OR $this->request->clientIp() == '46.193.0.139' OR $this->request->clientIp() == '130.190.32.51') {
+                    $this->Session->setFlash('On arrête de scripter','default',array('class'=>'alert alert-danger'));
                     return $this->redirect(
                       array('controller' => 'Votes', 'action' => 'index')
                     );
+                  } else {
+                      $this->Vote->save($vote->getData());
+                      $this->Session->setFlash('Ton vote a été pris en compte','default',array('class'=>'alert alert-success'));
+                      return $this->redirect(
+                        array('controller' => 'Votes', 'action' => 'index')
+                      );
 
+                  }
+                } else {
+                    $this->Session->setFlash('Faut pas se tromper de captcha','default',array('class'=>'alert alert-success'));
+                    return $this->redirect(
+                      array('controller' => 'Votes', 'action' => 'voter',$id)
+                    );
                 }
 
 
